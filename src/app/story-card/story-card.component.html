@@ -1,0 +1,23 @@
+<div class="card col-md-3">
+  <div class="card-head">
+    <a href="{{ cardData.url }}" target="_blank">
+      <h5 class="card-title">{{ cardData.title }}</h5></a
+    >
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+      <small class="text-muted">{{ cardData.score }}</small>
+      <span> Points by </span>
+      <small
+        class="text-muted"
+        id="userName"
+        (click)="getUserData(cardData.by)"
+        #user
+        >{{ cardData.by }}</small
+      >
+    </p>
+    <p class="card-text">
+      <small class="text-muted">{{ cardData.time }}</small>
+    </p>
+  </div>
+</div>

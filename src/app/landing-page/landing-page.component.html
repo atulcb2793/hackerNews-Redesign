@@ -1,0 +1,21 @@
+<app-navbar (pageChange)="goToPage($event)"></app-navbar>
+<div class="container-fluid">
+  <app-spinner *ngIf="showSpinner"></app-spinner>
+  <div
+    class="card-deck"
+    *ngIf="!errorData"
+    [ngClass]="{ 'hide-deck': showSpinner }"
+  >
+    <app-story-card
+      style="width: 350px"
+      *ngFor="let one of renderData; let i = index"
+      [cardData]="one"
+      [index]="i"
+    ></app-story-card>
+  </div>
+
+  <div class="error alert alert-danger" *ngIf="errorData">
+    <strong>OOPS..!</strong> {{ errorData }}
+  </div>
+</div>
+<app-footer></app-footer>

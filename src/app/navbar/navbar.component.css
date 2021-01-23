@@ -1,0 +1,53 @@
+.header {
+  background-color: #313a5f;
+  height: 80px;
+  display: flex;
+}
+
+b {
+  color: white;
+  display: inline-block;
+  font-size: 2rem;
+}
+
+img {
+  height: 50px;
+  width: 50px;
+  vertical-align: top;
+}
+
+.logo-title,
+.options {
+  padding-top: 15px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  float: right;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+li a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+input {
+  display: inline;
+  width: auto;
+  height: 30px;
+}
+
+.form {
+  margin: auto;
+  text-align: end;
+}

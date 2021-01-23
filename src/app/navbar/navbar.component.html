@@ -1,0 +1,38 @@
+<nav class="col-md-12 header">
+  <div class="col-md-3 logo-title">
+    <img src="assets/logo1.png" alt="Logo" />
+    <b>Hacker News</b>
+  </div>
+  <div class="col-md-4 form">
+    <input
+      class="form-control"
+      type="search"
+      placeholder="Search"
+      style="display: inline; width: 200px"
+    />
+    <button
+      class="btn btn-outline-success"
+      type="submit"
+      style="margin-left: 10px"
+    >
+      Search
+    </button>
+  </div>
+  <div class="col-md-5 options" style="float: right">
+    <ul>
+      <li>
+        <button class="btn btn-warning" type="submit" style="padding: 15px">
+          Login
+        </button>
+      </li>
+      <li><a>Submit</a></li>
+      <li><a>Jobs</a></li>
+      <li><a>Show</a></li>
+      <li><a>Ask</a></li>
+      <li><a>Comments</a></li>
+      <li>
+        <a (click)="goToPageEvent(postState)">{{ postState }}</a>
+      </li>
+    </ul>
+  </div>
+</nav>
