@@ -1,6 +1,7 @@
 <app-navbar (pageChange)="goToPage($event)"></app-navbar>
 <div class="container-fluid">
   <app-spinner *ngIf="showSpinner"></app-spinner>
+
   <div
     class="card-deck"
     *ngIf="!errorData"
@@ -18,4 +19,13 @@
     <strong>OOPS..!</strong> {{ errorData }}
   </div>
 </div>
+
+<!-- pagination  -->
+<app-pagination
+  [storyCount]="totalStoryCount"
+  (renderData)="renderDataByPageNum($event)"
+></app-pagination>
+
+<!-- Footer -->
+
 <app-footer></app-footer>
