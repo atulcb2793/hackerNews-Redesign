@@ -1,0 +1,39 @@
+<nav
+  style="margin: auto; text-align: center"
+  aria-label="Page navigation example"
+>
+  <ul class="pagination" style="justify-content: center; list-style: none">
+    <li class="page-item">
+      <a
+        class="page-link"
+        (click)="updatePageNumber('prev')"
+        aria-label="Previous"
+      >
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li class="page-item" *ngFor="let num of currentPages">
+      <a class="page-link" (click)="updatePage(num)">{{ num }}</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link" (click)="updatePageNumber('next')" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+  <div class="item-count-selection" style="margin: 10px; font-size: 12px">
+    <small class="text-primary" style="margin-right: 5px">Items per page</small>
+    <select
+      (change)="updatePage(0, itemCount.value)"
+      #itemCount
+      name="page"
+      id="page"
+    >
+      <option [value]="12">12</option>
+      <option [value]="20">20</option>
+      <option [value]="40">40</option>
+      <option [value]="80">80</option>
+      <option [value]="120">120</option>
+    </select>
+  </div>
+</nav>

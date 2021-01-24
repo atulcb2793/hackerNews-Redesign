@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit, Output } from '@angular/core';
+import * as EventEmitter from 'events';
+import { Subscription, throwError } from 'rxjs';
 import { BackendService } from '../backend-data.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { BackendService } from '../backend-data.service';
 })
 export class LandingPageComponent implements OnInit, OnDestroy {
   constructor(private backendService: BackendService) {}
+  totalStoryCount;
   storyKeys;
   renderData = [];
   showSpinner: boolean = false;
@@ -34,6 +36,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
       this.backendService.getStories(page).subscribe(
         (data) => {
           this.storyKeys = data;
+          this.totalStoryCount = this.storyKeys.length;
           this.getStoryDetails();
         },
         (error) => {
@@ -43,16 +46,23 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     );
   }
 
+  renderDataByPageNum(paginationDetails) {
+    this.getStoryDetails(
+      Number(paginationDetails.pageNum),
+      Number(paginationDetails.itemsPerPage)
+    );
+  }
+
   getStoryDetails(page = 0, items = 12) {
+    this.showSpinner = true;
     this.initialize();
     let startCount = page * items;
     let endCount = startCount + items;
-    console.log('length', this.storyKeys.length);
     while (startCount !== endCount) {
       this.subscriptions.add(
         this.backendService.getStory(this.storyKeys[startCount]).subscribe(
           (res) => {
-            this.renderData.push(res);
+            if (res) this.renderData.push(res);
           },
           (error) => {
             this.errorHandle(error);
