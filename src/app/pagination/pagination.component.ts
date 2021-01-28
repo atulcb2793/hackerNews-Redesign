@@ -5,6 +5,8 @@ import {
   Output,
   EventEmitter,
   OnChanges,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 
 @Component({
@@ -14,13 +16,16 @@ import {
 })
 export class PaginationComponent implements OnChanges {
   @Input() storyCount: any;
+  @Input() pageChange: any;
   @Output() renderData = new EventEmitter();
   paginationDetails: any = {};
   currentIndex;
   maxPages;
   pageArray = [];
+  itemCount = 12;
   currentPages;
-
+  pageCountArray = [];
+  deafultItemsPerPage = 12;
   constructor() {}
 
   ngOnInit() {
@@ -30,9 +35,15 @@ export class PaginationComponent implements OnChanges {
   initialize() {
     this.currentPages = [1, 2, 3, 4, 5];
     this.currentIndex = 0;
+    this.pageArray = [];
+    this.pageCountArray = [12, 20, 40, 80, 120];
   }
 
   ngOnChanges() {
+    if (this.pageChange) {
+      this.deafultItemsPerPage = 12;
+      this.initialize();
+    }
     if (this.storyCount) {
       this.setMaxPagesAndPageArray();
     }
@@ -47,7 +58,7 @@ export class PaginationComponent implements OnChanges {
   }
 
   setMaxPagesAndPageArray(items = 12) {
-    this.maxPages = Math.ceil(this.storyCount / items);
+    this.maxPages = Math.ceil(this.storyCount / items) - 1;
     this.pageArray = Array.from({ length: this.maxPages }, (_, i) => i + 1);
   }
 

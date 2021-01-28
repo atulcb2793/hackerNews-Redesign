@@ -12,14 +12,30 @@ span a:hover {
 .footer {
   background-color: #313a5f;
   height: 50px;
-  display: flex;
-}
-
-.options {
-  margin: auto;
   text-align: center;
 }
 
 html {
   background-color: aliceblue;
+}
+
+ul {
+  list-style-type: none;
+  display: inline-block;
+}
+
+li {
+  float: left;
+  cursor: pointer;
+}
+
+li a {
+  display: block;
+  color: white;
+  padding: 10px;
+}
+
+li a:hover {
+  color: white;
+  text-decoration: underline;
 }

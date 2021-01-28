@@ -22,13 +22,29 @@ a:hover {
 }
 
 .card-head {
-  padding: 20px;
+  padding-top: 20px;
+  height: 100px;
 }
 
 .card-text {
   text-align: center;
 }
 
-#userName:hover {
+#userName,
+.comments {
   text-decoration: underline;
+}
+
+#userName:hover {
+  text-decoration: none;
+}
+
+.comments:hover {
+  text-decoration: none;
+}
+
+.text-muted {
+  margin-left: 2px;
+  font-weight: 500;
+  cursor: pointer;
 }

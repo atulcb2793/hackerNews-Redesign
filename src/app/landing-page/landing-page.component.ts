@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit, Output } from '@angular/core';
-import * as EventEmitter from 'events';
 import { Subscription, throwError } from 'rxjs';
 import { BackendService } from '../backend-data.service';
 
@@ -13,16 +12,18 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   totalStoryCount;
   storyKeys;
   renderData = [];
+  pageChangeEvent;
   showSpinner: boolean = false;
   errorData: string;
   subscriptions: Subscription = new Subscription();
 
   ngOnInit() {
     this.showSpinner = true;
-    this.goToPage();
+    this.getStoriesId('Top');
   }
 
-  goToPage(page = 'Latest') {
+  goToPage(page) {
+    this.pageChangeEvent = page;
     this.getStoriesId(page);
   }
 
@@ -58,18 +59,20 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     this.initialize();
     let startCount = page * items;
     let endCount = startCount + items;
-    while (startCount !== endCount) {
-      this.subscriptions.add(
-        this.backendService.getStory(this.storyKeys[startCount]).subscribe(
-          (res) => {
-            if (res) this.renderData.push(res);
-          },
-          (error) => {
-            this.errorHandle(error);
-          }
-        )
-      );
-      startCount++;
+    if (this.storyKeys.length > 0) {
+      while (startCount !== endCount) {
+        this.subscriptions.add(
+          this.backendService.getStory(this.storyKeys[startCount]).subscribe(
+            (res) => {
+              if (Object.keys(res).length > 0) this.renderData.push(res);
+            },
+            (error) => {
+              this.errorHandle(error);
+            }
+          )
+        );
+        startCount++;
+      }
     }
     this.showSpinner = false;
   }
