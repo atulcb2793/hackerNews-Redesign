@@ -4,15 +4,14 @@
   min-height: 100vh;
 }
 
-.card-deck {
-  padding-left: 40px;
-  margin: auto;
-}
-
 .hide-deck {
   opacity: 0;
 }
 
 .error {
   margin-top: 50px;
+}
+
+.card-deck {
+  padding-top: 30px;
 }

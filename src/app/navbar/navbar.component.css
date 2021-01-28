@@ -27,6 +27,7 @@ ul {
 
 li {
   float: right;
+  cursor: pointer;
 }
 
 li a {

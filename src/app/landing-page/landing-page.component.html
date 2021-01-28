@@ -3,7 +3,7 @@
   <app-spinner *ngIf="showSpinner"></app-spinner>
 
   <div
-    class="card-deck"
+    class="card-deck justify-content-center"
     *ngIf="!errorData"
     [ngClass]="{ 'hide-deck': showSpinner }"
   >
@@ -20,12 +20,13 @@
   </div>
 </div>
 
+<!-- Footer -->
+
 <!-- pagination  -->
 <app-pagination
+  [pageChange]="pageChangeEvent"
   [storyCount]="totalStoryCount"
   (renderData)="renderDataByPageNum($event)"
 ></app-pagination>
-
-<!-- Footer -->
 
 <app-footer></app-footer>
