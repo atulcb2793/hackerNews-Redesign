@@ -9,14 +9,14 @@ export class NavbarComponent implements OnInit {
   @Output() pageChange = new EventEmitter();
   constructor() {}
 
-  postState: string;
+  currentPage: string;
 
   ngOnInit() {
-    this.postState = 'Latest';
+    this.currentPage = 'Latest';
   }
 
   goToPageEvent(pageName) {
-    this.postState = pageName === 'Latest' ? 'Top' : 'Latest';
-    this.pageChange.emit(pageName);
+    this.currentPage = pageName === 'Latest' ? 'Top' : 'Latest';
+    this.pageChange.emit(this.currentPage);
   }
 }

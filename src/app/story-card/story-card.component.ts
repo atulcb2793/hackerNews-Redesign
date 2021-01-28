@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Story } from '../modal/story';
 
 @Component({
   selector: 'app-story-card',
@@ -6,15 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./story-card.component.css'],
 })
 export class StoryCardComponent implements OnInit {
-  @Input()
-  cardData;
+  @Input() cardData: Story;
 
   constructor() {}
 
   ngOnInit() {}
-
-  getUserData(user) {
-    // TO DO get user data and display on modal
-    console.log(user);
-  }
 }

@@ -11,6 +11,7 @@
       style="display: inline; width: 200px"
     />
     <button
+      id="searchButton"
       class="btn btn-outline-success"
       type="submit"
       style="margin-left: 10px"
@@ -21,7 +22,12 @@
   <div class="col-md-5 options" style="float: right">
     <ul>
       <li>
-        <button class="btn btn-warning" type="submit" style="padding: 15px">
+        <button
+          id="loginButton"
+          class="btn btn-warning"
+          type="submit"
+          style="padding: 15px"
+        >
           Login
         </button>
       </li>
@@ -31,7 +37,9 @@
       <li><a>Ask</a></li>
       <li><a>Comments</a></li>
       <li>
-        <a (click)="goToPageEvent(postState)">{{ postState }}</a>
+        <a class="switch-posts" (click)="goToPageEvent(currentPage)">{{
+          currentPage
+        }}</a>
       </li>
     </ul>
   </div>

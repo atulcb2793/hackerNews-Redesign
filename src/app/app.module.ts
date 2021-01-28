@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { AppRoutingModule } from './app-routing.module';
+import { PaginationComponent } from './pagination/pagination.component';
+import { CustomTimeagoPipe } from './shared/timeago.pipe';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { AppRoutingModule } from './app-routing.module';
     StoryCardComponent,
     FooterComponent,
     SpinnerComponent,
+    PaginationComponent,
+    CustomTimeagoPipe,
   ],
   imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
   providers: [],

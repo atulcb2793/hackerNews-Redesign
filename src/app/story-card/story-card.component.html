@@ -1,23 +1,26 @@
 <div class="card col-md-3">
   <div class="card-head">
-    <a href="{{ cardData.url }}" target="_blank">
-      <h5 class="card-title">{{ cardData.title }}</h5></a
+    <a href="{{ cardData?.url }}" target="_blank">
+      <h5 class="card-title">{{ cardData?.title }}</h5></a
     >
   </div>
   <div class="card-body">
     <p class="card-text">
-      <small class="text-muted">{{ cardData.score }}</small>
-      <span> Points by </span>
-      <small
-        class="text-muted"
-        id="userName"
-        (click)="getUserData(cardData.by)"
-        #user
-        >{{ cardData.by }}</small
-      >
+      <small class="text-muted">{{ cardData?.score }}</small>
+      <small class="text-muted">Points by</small>
+      <small class="text-muted" id="userName">{{ cardData?.by }}</small>
     </p>
     <p class="card-text">
-      <small class="text-muted">{{ cardData.time }}</small>
+      <small class="text-muted">Updated </small>
+      <small class="text-muted">{{ cardData?.time | timeago }}</small>
+    </p>
+
+    <p class="card-text comments" *ngIf="cardData?.descendants > 0">
+      <small class="text-muted">{{ cardData?.descendants }}</small>
+      <small class="text-muted">Comments</small>
+    </p>
+    <p class="card-text comments" *ngIf="cardData?.descendants === 0">
+      <small class="text-muted">Discuss</small>
     </p>
   </div>
 </div>

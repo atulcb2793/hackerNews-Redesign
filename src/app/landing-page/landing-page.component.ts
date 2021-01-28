@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit, Output } from '@angular/core';
+import { Subscription, throwError } from 'rxjs';
 import { BackendService } from '../backend-data.service';
 
 @Component({
@@ -9,18 +9,21 @@ import { BackendService } from '../backend-data.service';
 })
 export class LandingPageComponent implements OnInit, OnDestroy {
   constructor(private backendService: BackendService) {}
+  totalStoryCount;
   storyKeys;
   renderData = [];
+  pageChangeEvent;
   showSpinner: boolean = false;
   errorData: string;
   subscriptions: Subscription = new Subscription();
 
   ngOnInit() {
     this.showSpinner = true;
-    this.goToPage();
+    this.getStoriesId('Top');
   }
 
-  goToPage(page = 'Latest') {
+  goToPage(page) {
+    this.pageChangeEvent = page;
     this.getStoriesId(page);
   }
 
@@ -34,6 +37,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
       this.backendService.getStories(page).subscribe(
         (data) => {
           this.storyKeys = data;
+          this.totalStoryCount = this.storyKeys.length;
           this.getStoryDetails();
         },
         (error) => {
@@ -43,23 +47,32 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     );
   }
 
+  renderDataByPageNum(paginationDetails) {
+    this.getStoryDetails(
+      Number(paginationDetails.pageNum),
+      Number(paginationDetails.itemsPerPage)
+    );
+  }
+
   getStoryDetails(page = 0, items = 12) {
+    this.showSpinner = true;
     this.initialize();
     let startCount = page * items;
     let endCount = startCount + items;
-    console.log('length', this.storyKeys.length);
-    while (startCount !== endCount) {
-      this.subscriptions.add(
-        this.backendService.getStory(this.storyKeys[startCount]).subscribe(
-          (res) => {
-            this.renderData.push(res);
-          },
-          (error) => {
-            this.errorHandle(error);
-          }
-        )
-      );
-      startCount++;
+    if (this.storyKeys.length > 0) {
+      while (startCount !== endCount) {
+        this.subscriptions.add(
+          this.backendService.getStory(this.storyKeys[startCount]).subscribe(
+            (res) => {
+              if (Object.keys(res).length > 0) this.renderData.push(res);
+            },
+            (error) => {
+              this.errorHandle(error);
+            }
+          )
+        );
+        startCount++;
+      }
     }
     this.showSpinner = false;
   }
