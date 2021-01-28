@@ -11,7 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PaginationComponent } from './pagination/pagination.component';
-import { CustomTimeagoPipe } from './shared/timeago.pipe';
+import { CustomTimeagoPipe } from './shared/pipe/timeago.pipe';
 
 @NgModule({
   declarations: [

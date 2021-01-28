@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Story } from './modal/story';
+import { Story } from '../../modal/story';
 
 @Injectable({
   providedIn: 'root',

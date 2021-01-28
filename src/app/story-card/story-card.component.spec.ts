@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CustomTimeagoPipe } from '../shared/timeago.pipe';
+import { CustomTimeagoPipe } from '../shared/pipe/timeago.pipe';
 
 import { StoryCardComponent } from './story-card.component';
 import { Story } from '../modal/story';

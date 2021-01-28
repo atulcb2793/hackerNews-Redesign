@@ -4,7 +4,7 @@ import {
   fakeAsync,
   tick,
 } from '@angular/core/testing';
-import { BackendService } from '../backend-data.service';
+import { BackendService } from '../shared/service/backend-data.service';
 import { DebugElement } from '@angular/core';
 import { LandingPageComponent } from './landing-page.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';

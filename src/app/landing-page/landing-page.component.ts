@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription, throwError } from 'rxjs';
-import { BackendService } from '../backend-data.service';
+import { BackendService } from '../shared/service/backend-data.service';
 
 @Component({
   selector: 'app-landing-page',
