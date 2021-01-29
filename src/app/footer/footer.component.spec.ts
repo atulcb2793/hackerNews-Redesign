@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
-import { FooterComponent } from './footer.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { FooterComponent } from './footer.component';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -25,7 +25,7 @@ describe('FooterComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  //DOM
+  // DOM
   it('check for DOM rendering upon component creation (footer element)', () => {
     const footer = el.query(By.css('.footer'));
     expect(footer).toBeTruthy('Footer is not present');

@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit, Output } from '@angular/core';
-import { Subscription, throwError } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { BackendService } from '../shared/service/backend-data.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   storyKeys;
   renderData = [];
   pageChangeEvent;
-  showSpinner: boolean = false;
+  showSpinner: boolean;
   errorData: string;
   subscriptions: Subscription = new Subscription();
 
@@ -58,13 +58,15 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     this.showSpinner = true;
     this.initialize();
     let startCount = page * items;
-    let endCount = startCount + items;
+    const endCount = startCount + items;
     if (this.storyKeys.length > 0) {
       while (startCount !== endCount) {
         this.subscriptions.add(
           this.backendService.getStory(this.storyKeys[startCount]).subscribe(
             (res) => {
-              if (Object.keys(res).length > 0) this.renderData.push(res);
+              if (res && Object.keys(res).length > 0) {
+                this.renderData.push(res);
+              }
             },
             (error) => {
               this.errorHandle(error);

@@ -1,12 +1,11 @@
 import { DebugElement } from '@angular/core';
 import {
   ComponentFixture,
-  TestBed,
   fakeAsync,
+  TestBed,
   tick,
 } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
 import { NavbarComponent } from './navbar.component';
 
 describe('NavbarComponent', () => {
@@ -33,22 +32,24 @@ describe('NavbarComponent', () => {
   });
 
   it('should emit the event with pageName as Top when clicked on Latest option', () => {
-    component.goToPageEvent('Latest');
+    const pageName = 'Latest';
+    spyOn(component.pageChange, 'emit');
+    component.goToPageEvent(pageName);
+    fixture.detectChanges();
     expect(component.currentPage).toBe('Top');
-    component.pageChange.subscribe((data) =>
-      expect(data).toBe(component.currentPage)
-    );
+    expect(component.pageChange.emit).toHaveBeenCalledWith(pageName);
   });
 
   it('should emit the event with pageName as Latest when clicked on Top option', () => {
-    component.goToPageEvent('Top');
+    const pageName = 'Top';
+    spyOn(component.pageChange, 'emit');
+    component.goToPageEvent(pageName);
+    fixture.detectChanges();
     expect(component.currentPage).toBe('Latest');
-    component.pageChange.subscribe((data) =>
-      expect(data).toBe(component.currentPage)
-    );
+    expect(component.pageChange.emit).toHaveBeenCalledWith(pageName);
   });
 
-  //DOM AND EVENT TESTING
+  // DOM AND EVENT TESTING
   it('check for DOM rendering upon component creation (Header and buttons are present)', () => {
     const header = el.query(By.css('.header'));
     const loginButton = el.nativeElement.querySelector('#loginButton');

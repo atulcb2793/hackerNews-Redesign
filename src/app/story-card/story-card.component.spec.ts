@@ -1,9 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { CustomTimeagoPipe } from '../shared/pipe/timeago.pipe';
-
-import { StoryCardComponent } from './story-card.component';
-import { Story } from '../modal/story';
 import { DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Story } from '../modal/story';
+import { CustomTimeagoPipe } from '../shared/pipe/timeago.pipe';
+import { StoryCardComponent } from './story-card.component';
 
 describe('StoryCardComponent', () => {
   let component: StoryCardComponent;
@@ -28,7 +27,7 @@ describe('StoryCardComponent', () => {
   });
 
   it('should reder the card with details on screen whent there is cardData ', () => {
-    let testCardObject: Story = {
+    const testCardObject: Story = {
       id: 1232,
       url: 'testURL',
       by: 'testUser',
@@ -64,7 +63,7 @@ describe('StoryCardComponent', () => {
   });
 
   it('should reder the discuss option rather than comment when comment count is 0', () => {
-    let testCardObject: Story = {
+    const testCardObject: Story = {
       id: 123,
       descendants: 0,
     };

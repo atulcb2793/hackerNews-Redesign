@@ -1,6 +1,6 @@
 import { CustomTimeagoPipe } from './timeago.pipe';
 
-let timeStamps = {
+const timeStamps = {
   minsAgo: Math.round(new Date().getTime() / 1000.0) - 120,
   hourAgo: Math.round(new Date().getTime() / 1000.0) - 60 * 60 * 2,
   daysAgo: Math.round(new Date().getTime() / 1000.0) - 60 * 60 * 25,

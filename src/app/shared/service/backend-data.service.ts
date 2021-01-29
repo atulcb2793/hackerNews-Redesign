@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { appsettings } from '../../config/App-Constants';
 import { Story } from '../../modal/story';
 
 @Injectable({
@@ -7,11 +8,9 @@ import { Story } from '../../modal/story';
 })
 export class BackendService {
   constructor(private http: HttpClient) {}
-
-  baseUrl: string = `https://hacker-news.firebaseio.com/v0`;
-
+  baseUrl: string = appsettings.BASE_URL;
   getStories(page) {
-    let storyType = page === 'Latest' ? 'newstories' : 'topstories';
+    const storyType = page === 'Latest' ? 'newstories' : 'topstories';
     return this.http.get(`${this.baseUrl}/${storyType}.json?print=pretty`);
   }
 

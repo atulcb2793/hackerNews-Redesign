@@ -1,15 +1,9 @@
-import { BackendService } from './backend-data.service';
-
-import {
-  ComponentFixture,
-  fakeAsync,
-  TestBed,
-  tick,
-} from '@angular/core/testing';
 import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { BackendService } from './backend-data.service';
 
 const testStoryData = {
   id: 123,
@@ -24,7 +18,8 @@ const testStoryData = {
 const testStoryIdArray = [1, 2, 3];
 
 describe('BackendService', () => {
-  let mockService: BackendService, httpTestingController: HttpTestingController;
+  let mockService: BackendService;
+  let httpTestingController: HttpTestingController;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -41,7 +36,7 @@ describe('BackendService', () => {
   });
 
   it('getStories() should return array of story id for latest stories ', () => {
-    let page = 'Latest';
+    const page = 'Latest';
     mockService.getStories(page).subscribe((res) => {
       expect(res).toEqual(testStoryIdArray);
     });
@@ -53,7 +48,7 @@ describe('BackendService', () => {
   });
 
   it('getStories() should return array of story id for new stories ', () => {
-    let page = 'Top';
+    const page = 'Top';
     mockService.getStories(page).subscribe((res) => {
       expect(res).toEqual(testStoryIdArray);
     });
@@ -65,7 +60,7 @@ describe('BackendService', () => {
   });
 
   it('getStory() should return story details for story id ', () => {
-    let id = 123;
+    const id = 123;
     mockService.getStory(id).subscribe((res) => {
       expect(res).toEqual(testStoryData);
     });

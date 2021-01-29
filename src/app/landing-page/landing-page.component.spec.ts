@@ -1,15 +1,15 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { DebugElement } from '@angular/core';
 import {
   ComponentFixture,
-  TestBed,
   fakeAsync,
+  TestBed,
   tick,
 } from '@angular/core/testing';
-import { BackendService } from '../shared/service/backend-data.service';
-import { DebugElement } from '@angular/core';
-import { LandingPageComponent } from './landing-page.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of, throwError } from 'rxjs';
 import { Story } from '../modal/story';
+import { BackendService } from '../shared/service/backend-data.service';
+import { LandingPageComponent } from './landing-page.component';
 
 describe('LandingPageComponent', () => {
   let component: LandingPageComponent;
@@ -40,7 +40,7 @@ describe('LandingPageComponent', () => {
 
   it('test goTpPage function which sets page change event value', () => {
     spyOn(component, 'getStoriesId');
-    let page = 'Test';
+    const page = 'Test';
     component.goToPage(page);
     fixture.detectChanges();
     expect(component.pageChangeEvent).toEqual(page);
@@ -55,7 +55,7 @@ describe('LandingPageComponent', () => {
   });
 
   it('test getStoriesId function ', fakeAsync(() => {
-    let returnData = [1, 2, 3];
+    const returnData = [1, 2, 3];
     spyOn(component, 'getStoryDetails');
     const service = el.injector.get(BackendService);
     spyOn(service, 'getStories').and.returnValue(of(returnData));
@@ -80,7 +80,7 @@ describe('LandingPageComponent', () => {
   }));
 
   it('test renderDataByPageNum function ', () => {
-    let paramObject = { pageNum: '10', itemsPerPage: '20' };
+    const paramObject = { pageNum: '10', itemsPerPage: '20' };
     spyOn(component, 'getStoryDetails');
     component.renderDataByPageNum(paramObject);
     fixture.detectChanges();
@@ -91,7 +91,7 @@ describe('LandingPageComponent', () => {
   });
 
   it('test getStoryDetails function atlease one storykey retuned by backed ', fakeAsync(() => {
-    let returnData: Story = { id: 123 };
+    const returnData: Story = { id: 123 };
     component.storyKeys = [1];
     spyOn(component, 'initialize');
     const service = el.injector.get(BackendService);
@@ -106,7 +106,7 @@ describe('LandingPageComponent', () => {
 
   it('test getStoryDetails function if backed returns null -do not push to response array ', fakeAsync(() => {
     component.storyKeys = [1];
-    let returnData: any = {};
+    const returnData: any = {};
     spyOn(component, 'initialize');
     const service = el.injector.get(BackendService);
     spyOn(service, 'getStory').and.returnValue(of(returnData));
@@ -154,7 +154,7 @@ describe('LandingPageComponent', () => {
     expect(component['subscriptions'].unsubscribe).toHaveBeenCalled();
   });
 
-  //DOM TEST
+  // DOM TEST
   it('should display error message on screen in case of error', fakeAsync(() => {
     component.errorData = 'test';
     const errorComponentBeforeChange = el.nativeElement.querySelector('.error');

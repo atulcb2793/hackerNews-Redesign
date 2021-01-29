@@ -1,20 +1,18 @@
 import {
   Component,
+  EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
-  EventEmitter,
-  OnChanges,
-  ViewChild,
-  ElementRef,
 } from '@angular/core';
-
+import { pagination } from '../config/App-Constants';
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.css'],
 })
-export class PaginationComponent implements OnChanges {
+export class PaginationComponent implements OnChanges, OnInit {
   @Input() storyCount: any;
   @Input() pageChange: any;
   @Output() renderData = new EventEmitter();
@@ -22,10 +20,10 @@ export class PaginationComponent implements OnChanges {
   currentIndex;
   maxPages;
   pageArray = [];
-  itemCount = 12;
+  itemCount = pagination.DEFAULT_ITEMS_PER_PAGE;
   currentPages;
   pageCountArray = [];
-  deafultItemsPerPage = 12;
+  deafultItemsPerPage = pagination.DEFAULT_ITEMS_PER_PAGE;
   constructor() {}
 
   ngOnInit() {
@@ -33,15 +31,15 @@ export class PaginationComponent implements OnChanges {
   }
 
   initialize() {
-    this.currentPages = [1, 2, 3, 4, 5];
+    this.currentPages = pagination.CURRENT_PAGES;
     this.currentIndex = 0;
     this.pageArray = [];
-    this.pageCountArray = [12, 20, 40, 80, 120];
+    this.pageCountArray = pagination.ITEMS_PER_PAGE_ARRAY;
   }
 
   ngOnChanges() {
     if (this.pageChange) {
-      this.deafultItemsPerPage = 12;
+      this.deafultItemsPerPage = pagination.DEFAULT_ITEMS_PER_PAGE;
       this.initialize();
     }
     if (this.storyCount) {
@@ -52,7 +50,9 @@ export class PaginationComponent implements OnChanges {
   updatePage(pageNum = 0, itemsPerPage = 12) {
     this.paginationDetails.pageNum = pageNum;
     this.paginationDetails.itemsPerPage = itemsPerPage;
-    if (pageNum === 0) this.initialize();
+    if (pageNum === 0) {
+      this.initialize();
+    }
     this.setMaxPagesAndPageArray(itemsPerPage);
     this.renderData.emit(this.paginationDetails);
   }
@@ -64,14 +64,18 @@ export class PaginationComponent implements OnChanges {
 
   updatePageNumber(flag) {
     if (flag === 'next') {
-      if (this.currentIndex + 5 < this.maxPages) this.currentIndex += 5;
+      if (this.currentIndex + 5 < this.maxPages) {
+        this.currentIndex += 5;
+      }
 
       this.currentPages = this.pageArray.slice(
         this.currentIndex,
         this.currentIndex + 5
       );
     } else {
-      if (this.currentIndex === 0) this.currentIndex = 5;
+      if (this.currentIndex === 0) {
+        this.currentIndex = 5;
+      }
       this.currentPages = this.pageArray.slice(
         this.currentIndex - 5,
         this.currentIndex

@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { piepConstants } from '../../config/App-Constants';
 
 @Pipe({
   name: 'timeago',
@@ -6,17 +7,26 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class CustomTimeagoPipe implements PipeTransform {
   transform(value: any): any {
-    const timeNow = Math.round(new Date().getTime() / 1000.0);
-    const timeDiff = (timeNow - value) / 60;
-    if (timeDiff < 60) {
+    const timeNow = Math.round(new Date().getTime() / piepConstants.UNIXTIME);
+    const timeDiff = (timeNow - value) / piepConstants.HOURMINUTES;
+    if (timeDiff < piepConstants.HOURMINUTES) {
       return `${Math.floor(timeDiff)} minutes ago`;
-    } else if (timeDiff >= 60 && timeDiff < 1440) {
-      return `${Math.floor(timeDiff / 60)} hours ago`;
-    } else if (timeDiff >= 1440 && timeDiff < 43200) {
-      return `${Math.floor(timeDiff / 1440)} days ago`;
-    } else if (timeDiff >= 43200 && timeDiff < 518400) {
-      return `${Math.floor(timeDiff / 43200)} months ago`;
+    } else if (
+      timeDiff >= piepConstants.HOURMINUTES &&
+      timeDiff < piepConstants.DAYMINUTES
+    ) {
+      return `${Math.floor(timeDiff / piepConstants.HOURMINUTES)} hours ago`;
+    } else if (
+      timeDiff >= piepConstants.DAYMINUTES &&
+      timeDiff < piepConstants.MONTHMINUTES
+    ) {
+      return `${Math.floor(timeDiff / piepConstants.DAYMINUTES)} days ago`;
+    } else if (
+      timeDiff >= piepConstants.MONTHMINUTES &&
+      timeDiff < piepConstants.YEARMINUTES
+    ) {
+      return `${Math.floor(timeDiff / piepConstants.MONTHMINUTES)} months ago`;
     }
-    return `${Math.floor(timeDiff / 518400)} years ago`;
+    return `${Math.floor(timeDiff / piepConstants.YEARMINUTES)} years ago`;
   }
 }
